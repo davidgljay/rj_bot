@@ -29,6 +29,8 @@ async function getEntriesForNextHour() {
   }
 }
 
+//TODO: Iterate through results and run Twilio scripts accordingly. Presumably each script will have a url, those urls could be saved in the DB. 
+
 // Call the function and handle the returned entries
 // getEntriesForNextHour().then((entries) => {
 //   console.log('Entries for the next hour:', entries);
