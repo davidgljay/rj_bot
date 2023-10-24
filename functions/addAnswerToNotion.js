@@ -7,9 +7,8 @@ const notion = new Client({
 async function addAnswerToNotion(answer) {
   const { phoneNumber, timestamp, text, surveyId } = answer;
 
-  // Assuming you have functions to look up contacts and surveys by their respective IDs
+  // Assuming you have functions to look up contact by their phone number
   const contactId = await lookupContactIdByPhoneNumber(phoneNumber);
-  const surveyLinkId = await lookupSurveyIdBySurveyId(surveyId);
 
   try {
     const response = await notion.pages.create({
@@ -43,7 +42,7 @@ async function addAnswerToNotion(answer) {
         Survey: {
           relation: [
             {
-              id: surveyLinkId,
+              id: surveyId,
             },
           ],
         },
@@ -65,11 +64,30 @@ async function addAnswerToNotion(answer) {
 }
 
 async function lookupContactIdByPhoneNumber(phoneNumber) {
-  // Implementation for looking up contact by phone number
+  const databaseId = 'YOUR_CONTACTS_DATABASE_ID'; // Replace this with your contacts database id
+
+  try {
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      filter: {
+        property: 'phoneNumber',
+        text: {
+          equals: phoneNumber,
+        },
+      },
+    });
+
+    if (response.results.length > 0) {
+      return response.results[0].id;
+    } else {
+      // Handle case when no contact is found
+      return null;
+    }
+  } catch (error) {
+    console.error('Error', error);
+    return null;
+  }
 }
 
-async function lookupSurveyIdBySurveyId(surveyId) {
-  // Implementation for looking up survey by surveyId
-}
 
-module.exports = { addAnswerToNotion, lookupContactIdByPhoneNumber, lookupSurveyIdBySurveyId };
+module.exports = { addAnswerToNotion, lookupContactIdByPhoneNumber };
