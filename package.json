@@ -1,0 +1,29 @@
+{
+  "name": "rj_bot",
+  "version": "0.0.1",
+  "description": "A simple bot for assisting with reproductive justice dinners utilizing basic relational measurement frameworks.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidgljay/rj_bot.git"
+  },
+  "keywords": [
+    "twilio",
+    "bot"
+  ],
+  "author": "David Jay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidgljay/rj_bot/issues"
+  },
+  "homepage": "https://github.com/davidgljay/rj_bot#readme",
+  "dependencies": {
+    "@notionhq/client": "^2.2.13"
+  }
+}
