@@ -9,6 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+  env:
+    ENVIRONMENT: production
+
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v3
