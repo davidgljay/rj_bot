@@ -1,0 +1,38 @@
+name: Deploy Twilio Functions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 14
+
+    - name: Install Twilio CLI
+      run: npm install -g twilio-cli
+
+    - name: Authenticate with Twilio
+      run: twilio login --username ${{ secrets.TWILIO_USERNAME }} --password ${{ secrets.TWILIO_PASSWORD }}
+
+    - name: Deploy Functions
+      run: twilio serverless:deploy --cwd functions -o -s ${{ secrets.TWILIO_SERVICE_ID }}
+
+    # - name: Notify on Deployment Status
+    #   if: always()
+    #   uses: actions/slack@v4
+    #   with:
+    #     status: ${{ job.status }}
+    #     text: "Deployment ${{ job.status }} for ${{ github.repository }} on branch ${{ github.ref }}"
+    #   env:
+    #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    #     SLACK_CHANNEL: ${{ secrets.SLACK_CHANNEL }}
