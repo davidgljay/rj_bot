@@ -21,8 +21,9 @@ jobs:
     - name: Install Twilio CLI
       run: npm install -g twilio-cli
 
-    - name: Authenticate with Twilio
-      run: twilio login --username ${{ secrets.TWILIO_USERNAME }} --password ${{ secrets.TWILIO_PASSWORD }}
+    ## With environment variables this login shouldn't be necessary, according to Twilio documentation.
+    # - name: Authenticate with Twilio
+    #   run: twilio login --username ${{ secrets.TWILIO_USERNAME }} --password ${{ secrets.TWILIO_PASSWORD }}
 
     - name: Deploy Functions
       run: twilio serverless:deploy --cwd functions -o -s ${{ secrets.TWILIO_SERVICE_ID }}
