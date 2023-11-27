@@ -9,9 +9,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      TWILIO_SERVICE_ID: ${{ secrets.TWILIO_SERVICE_ID }}
-      TEST_SECRET: ${{ secrets.TEST_SECRET }}
+    # env:
+    #   TWILIO_SERVICE_ID: ${{ secrets.TWILIO_SERVICE_ID }}
+    #   TEST_SECRET: ${{ secrets.TEST_SECRET }}
 
     steps:
       - name: Checkout Repository
