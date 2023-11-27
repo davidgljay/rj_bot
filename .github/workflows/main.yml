@@ -36,7 +36,12 @@ jobs:
       #   run: twilio login --username ${{ secrets.TWILIO_USERNAME }} --password ${{ secrets.TWILIO_PASSWORD }}
 
       - name: Deploy Functions
-        run: twilio serverless:deploy --cwd functions -o -s ${{ env.TWILIO_SERVICE_SID }}
+        env: 
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_API_KEY: ${{ secrets.TWILIO_API_KEY }}
+          TWILIO_API_SECRET: ${{ secrets.TWILIO_API_SECRET }}
+        run: twilio serverless:deploy --cwd functions --override-existing-project -service_sid ${{ vars.TWILIO_SERVICE_SID }}
+        
 
       # - name: Notify on Deployment Status
       #   if: always()
