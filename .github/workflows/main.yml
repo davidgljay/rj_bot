@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      env: production
+      ENVIRONMENT: production
 
     steps:
       - name: Checkout Repository
