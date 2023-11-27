@@ -11,7 +11,7 @@ jobs:
 
     env:
       TWILIO_SERVICE_ID: ${{ secrets.TWILIO_SERVICE_ID }}
-      TEST_SECRET: ${{ secrest.TEST_SECRET }}
+      TEST_SECRET: ${{ secrets.TEST_SECRET }}
 
     steps:
       - name: Checkout Repository
