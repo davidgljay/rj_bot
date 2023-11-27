@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: Test that secrets are behaving correctly.
+        run: echo ${{ secrets.TEST_SECRET}}
+
       - name: Install Twilio CLI
         run: npm install -g twilio-cli
 
