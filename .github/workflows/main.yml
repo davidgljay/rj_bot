@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      ENVIRONMENT: production
+      TWILIO_SERVICE_ID: ${{ secrets.TWILIO_SERVICE_ID }}
+      TEST_SECRET: ${{ secrest.TEST_SECRET }}
 
     steps:
       - name: Checkout Repository
@@ -22,8 +23,6 @@ jobs:
           node-version: 18
 
       - name: Test that secrets are behaving correctly.
-        env:
-          TEST_SECRET: ${{ secrets.TEST_SECRET}}
         run: echo $TEST_SECRET
 
       - name: Install Twilio CLI
@@ -37,7 +36,7 @@ jobs:
       #   run: twilio login --username ${{ secrets.TWILIO_USERNAME }} --password ${{ secrets.TWILIO_PASSWORD }}
 
       - name: Deploy Functions
-        run: twilio serverless:deploy --cwd functions -o -s ${{ secrets.TWILIO_SERVICE_ID }}
+        run: twilio serverless:deploy --cwd functions -o -s ${{ env.TWILIO_SERVICE_ID }}
 
       # - name: Notify on Deployment Status
       #   if: always()
